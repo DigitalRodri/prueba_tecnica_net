@@ -1,3 +1,4 @@
+using Domain.DTOs;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,8 @@ namespace AlicundePruebaTecnica.Controllers
         {
             try
             {
-                return Ok(1234);
+                IEnumerable<RetailerDto> response = _marketPartiesService.GetAllAccounts();
+                return Ok(response);
             }
             catch (Exception ex)
             {
