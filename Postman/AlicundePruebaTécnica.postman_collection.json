@@ -1,0 +1,43 @@
+{
+	"info": {
+		"_postman_id": "63957038-65dd-40f1-925d-b0162e4e0d67",
+		"name": "AlicundePruebaTécnica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36602723"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "es-ES",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:16809/api/marketparties",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "16809",
+					"path": [
+						"api",
+						"marketparties"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

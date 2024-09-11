@@ -6,3 +6,5 @@ Realizar un programa en .Net - C#
 2. Almacenar esta inforamción en la base de datos
 3. realizar un controlador que filter por Primary Key
 4. Construir una api Rest con swagger que permita visualizar los datos almacenados en la base de datos.
+------
+For testing locally in Postman use IISExpress and: http://localhost:16809/api/marketparties
