@@ -1,3 +1,4 @@
+using Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlicundePruebaTecnica.Controllers
@@ -6,6 +7,12 @@ namespace AlicundePruebaTecnica.Controllers
     [Route("api/marketparties")]
     public class MarketPartiesController : ControllerBase
     {
+        private readonly IMarketPartiesService _marketPartiesService;
+
+        public MarketPartiesController(IMarketPartiesService marketPartiesService)
+        {
+            _marketPartiesService = marketPartiesService;
+        }
 
         [HttpGet()]
         public ActionResult<int> GetAllAccounts()
