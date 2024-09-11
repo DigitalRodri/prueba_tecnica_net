@@ -17,5 +17,10 @@ namespace Infraestructure.Repository
         {
             return _marketPartiesContext.Retailers;
         }
+
+        public Retailer GetRetailer(int reId)
+        {
+            return _marketPartiesContext.Retailers.Find(reId);
+        }
     }
 }

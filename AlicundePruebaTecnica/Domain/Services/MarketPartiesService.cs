@@ -22,5 +22,12 @@ namespace Domain.Services
 
             return _autoMapper.Map<IEnumerable<RetailerDto>>(retailerList);
         }
+
+        public RetailerDto GetRetailer(int reId)
+        {
+            Retailer retailer = _marketPartiesRepository.GetRetailer(reId);
+
+            return _autoMapper.Map<RetailerDto>(retailer);
+        }
     }
 }

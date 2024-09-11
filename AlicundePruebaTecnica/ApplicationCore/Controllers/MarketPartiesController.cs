@@ -16,12 +16,32 @@ namespace AlicundePruebaTecnica.Controllers
         }
 
         [HttpGet()]
-        public ActionResult<int> GetAllAccounts()
+        public ActionResult<int> GetAllRetailers()
         {
             try
             {
-                IEnumerable<RetailerDto> response = _marketPartiesService.GetAllRetailers();
-                return Ok(response);
+                IEnumerable<RetailerDto> retailerDTOList = _marketPartiesService.GetAllRetailers();
+                return Ok(retailerDTOList);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
+
+        [HttpGet("{reId}")]
+        public ActionResult<RetailerDto> GetRetailer(int reId)
+        {
+            try
+            {
+                RetailerDto retailerDTO = _marketPartiesService.GetRetailer(reId);
+
+                if (retailerDTO == null) return NoContent();
+                return Ok(retailerDTO);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex);
             }
             catch (Exception ex)
             {
