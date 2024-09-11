@@ -1,13 +1,21 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
+using Infraestructure.Repository.Models;
 
 namespace Infraestructure.Repository
 {
     public class MarketPartiesRepository : IMarketPartiesRepository
     {
+        private readonly MarketPartiesContext _marketPartiesContext;
+
+        public MarketPartiesRepository(MarketPartiesContext marketPartiesContext)
+        {
+            _marketPartiesContext = marketPartiesContext;
+        }
+
         public IEnumerable<Retailer> GetAllRetailers()
         {
-            return new List<Retailer>() { new Retailer(0, "name", "country", "codingScheme", "reCode") };
+            return _marketPartiesContext.Retailers;
         }
     }
 }

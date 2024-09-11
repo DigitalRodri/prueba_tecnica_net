@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Entities
 {
+    [Table("Retailer", Schema = "marketParties")]
     public class Retailer
     {
         [Key]
@@ -31,17 +32,29 @@ namespace Domain.Entities
         [StringLength(20)]
         public string ReCode { get; set; }
 
+        [Required]
+        [Column(TypeName = "datetime2")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime UTCCreatedDateTime { get; set; }
+
+        [Required]
+        [Column(TypeName = "datetime2")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime UTCUpdatedDateTime { get; set; }
+
         public Retailer()
         {
         }
 
-        public Retailer(int reId, string reName, string country, string codingScheme, string reCode)
+        public Retailer(int reId, string reName, string country, string codingScheme, string reCode, DateTime uTCCreatedDateTime, DateTime uTCUpdatedDateTime)
         {
             ReId = reId;
             ReName = reName;
             Country = country;
             CodingScheme = codingScheme;
             ReCode = reCode;
+            UTCCreatedDateTime = uTCCreatedDateTime;
+            UTCUpdatedDateTime = uTCUpdatedDateTime;
         }
     }
 }
