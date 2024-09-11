@@ -20,7 +20,7 @@ namespace AlicundePruebaTecnica.Controllers
         {
             try
             {
-                IEnumerable<RetailerDto> response = _marketPartiesService.GetAllAccounts();
+                IEnumerable<RetailerDto> response = _marketPartiesService.GetAllRetailers();
                 return Ok(response);
             }
             catch (Exception ex)

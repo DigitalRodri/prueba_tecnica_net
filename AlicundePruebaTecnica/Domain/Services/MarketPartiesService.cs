@@ -1,18 +1,26 @@
-﻿using Domain.DTOs;
+﻿using AutoMapper;
+using Domain.DTOs;
+using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Domain.Services
 {
     public class MarketPartiesService : IMarketPartiesService
     {
+        private readonly IMarketPartiesRepository _marketPartiesRepository;
+        private readonly IMapper _autoMapper;
 
-        public MarketPartiesService()
+        public MarketPartiesService(IMarketPartiesRepository marketPartiesRepository, IMapper mapper)
         {
+            _marketPartiesRepository = marketPartiesRepository;
+            _autoMapper = mapper;
         }
 
-        public IEnumerable<RetailerDto> GetAllAccounts()
+        public IEnumerable<RetailerDto> GetAllRetailers()
         {
-            return new List<RetailerDto>();
+            IEnumerable<Retailer> retailerList = _marketPartiesRepository.GetAllRetailers();
+
+            return _autoMapper.Map<IEnumerable<RetailerDto>>(retailerList);
         }
     }
 }

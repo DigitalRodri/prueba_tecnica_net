@@ -4,6 +4,6 @@ namespace Domain.Interfaces
 {
     public interface IMarketPartiesService
     {
-        public IEnumerable<RetailerDto> GetAllAccounts();
+        public IEnumerable<RetailerDto> GetAllRetailers();
     }
 }

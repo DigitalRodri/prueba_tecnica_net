@@ -1,5 +1,7 @@
 using Domain.Interfaces;
+using Domain.Profiles;
 using Domain.Services;
+using Infraestructure.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,8 @@ builder.Services.AddSwaggerGen();
 
 // Dependency injection
 builder.Services.AddScoped<IMarketPartiesService, MarketPartiesService>();
+builder.Services.AddScoped<IMarketPartiesRepository, MarketPartiesRepository>();
+builder.Services.AddAutoMapper(typeof(RetailerProfile));
 
 var app = builder.Build();
 
