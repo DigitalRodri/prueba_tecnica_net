@@ -5,6 +5,7 @@ using Infraestructure.Repository;
 using Infraestructure.Repository.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Diagnostics;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,11 @@ var Configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
     .Build();
+
+// Inject the Logger
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddTraceSource(new SourceSwitch("trace", "verbose"), new TextWriterTraceListener(Path.Combine(builder.Environment.ContentRootPath, builder.Environment.ApplicationName + "Log.log")));
 
 // Add services to the containers
 builder.Services.AddControllers();

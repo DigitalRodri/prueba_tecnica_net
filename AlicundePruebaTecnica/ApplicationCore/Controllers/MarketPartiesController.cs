@@ -2,18 +2,27 @@ using Domain.DTOs;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Testing.Helpers;
 
 namespace AlicundePruebaTecnica.Controllers
 {
+    ///<Summary>
+    /// Controller for MarketParties related endpoints
+    ///</Summary>
     [ApiController]
     [Route("api/marketparties")]
     public class MarketPartiesController : ControllerBase
     {
         private readonly IMarketPartiesService _marketPartiesService;
+        private readonly ILogger _logger;
 
-        public MarketPartiesController(IMarketPartiesService marketPartiesService)
+        ///<Summary>
+        /// Instantiates the necessary classes
+        ///</Summary>
+        public MarketPartiesController(IMarketPartiesService marketPartiesService, ILogger<MarketPartiesController> logger)
         {
             _marketPartiesService = marketPartiesService;
+            _logger = logger;
         }
 
         /// <summary>
@@ -31,7 +40,8 @@ namespace AlicundePruebaTecnica.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                _logger.LogCritical(LoggerHelper.GetExceptionLog(ex));
+                return StatusCode(StatusCodes.Status500InternalServerError, LoggerHelper.GetInternalServerErrorMessage());
             }
         }
 
@@ -49,7 +59,8 @@ namespace AlicundePruebaTecnica.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                _logger.LogCritical(LoggerHelper.GetExceptionLog(ex));
+                return StatusCode(StatusCodes.Status500InternalServerError, LoggerHelper.GetInternalServerErrorMessage());
             }
         }
 
@@ -70,7 +81,8 @@ namespace AlicundePruebaTecnica.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                _logger.LogCritical(LoggerHelper.GetExceptionLog(ex));
+                return StatusCode(StatusCodes.Status500InternalServerError, LoggerHelper.GetInternalServerErrorMessage());
             }
         }
     }

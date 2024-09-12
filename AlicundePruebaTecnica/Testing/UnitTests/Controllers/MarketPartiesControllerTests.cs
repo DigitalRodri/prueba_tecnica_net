@@ -3,6 +3,7 @@ using Domain.DTOs;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using System.Net;
 using Testing.Helpers;
@@ -14,6 +15,7 @@ namespace Testing.UnitTests.Controllers
     {
         private MarketPartiesController _marketPartiesController;
         private Mock<IMarketPartiesService> _marketPartiesService;
+        private Mock<ILogger<MarketPartiesController>> _logger;
         private Mock<HttpRequest> _httpRequest;
         private HttpContext _httpContext;
         private ControllerContext _controllerContext;
@@ -28,6 +30,7 @@ namespace Testing.UnitTests.Controllers
         {
             _marketPartiesService = new Mock<IMarketPartiesService>();
             _httpRequest = new Mock<HttpRequest>();
+            _logger = new Mock<ILogger<MarketPartiesController>>();
 
             _httpRequest.Setup(x => x.Scheme).Returns("http");
             _httpRequest.Setup(x => x.Host).Returns(HostString.FromUriComponent("localhost:8080"));
@@ -36,7 +39,7 @@ namespace Testing.UnitTests.Controllers
             _httpContext = Mock.Of<HttpContext>(x => x.Request == _httpRequest.Object);
             _controllerContext = new ControllerContext() { HttpContext = _httpContext };
 
-            _marketPartiesController = new MarketPartiesController(_marketPartiesService.Object) { ControllerContext = _controllerContext };
+            _marketPartiesController = new MarketPartiesController(_marketPartiesService.Object, _logger.Object) { ControllerContext = _controllerContext };
 
             _reId = ObjectHelper.ReId;
             _retailerDto = ObjectHelper.GetRetailerDto();
