@@ -15,6 +15,27 @@ namespace AlicundePruebaTecnica.Controllers
             _marketPartiesService = marketPartiesService;
         }
 
+
+
+        [HttpPost()]
+        public ActionResult<IEnumerable<RetailerDto>> FillRetailers()
+        {
+            try
+            {
+                IEnumerable<RetailerDto> retailerDTOs = _marketPartiesService.FillRetailersAsync().Result;
+
+                return Ok(retailerDTOs);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
+
         [HttpGet()]
         public ActionResult<int> GetAllRetailers()
         {
@@ -38,25 +59,6 @@ namespace AlicundePruebaTecnica.Controllers
 
                 if (retailerDTO == null) return NoContent();
                 return Ok(retailerDTO);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex);
-            }
-        }
-
-        [HttpPost()]
-        public ActionResult<IEnumerable<RetailerDto>> FillDB()
-        {
-            try
-            {
-                IEnumerable<RetailerDto> retailerDTOs = _marketPartiesService.FillDBAsync().Result;
-
-                return Ok(retailerDTOs);
             }
             catch (ArgumentException ex)
             {

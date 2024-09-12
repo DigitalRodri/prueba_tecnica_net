@@ -19,6 +19,18 @@ namespace Domain.Services
             _httpClientFactory = httpClientFactory;
         }
 
+        public async Task<IEnumerable<RetailerDto>> FillRetailersAsync()
+        {
+            IEnumerable<RetailerDto> retailerDtos = await GetRetailersFromWebAsync();
+
+            IEnumerable<Retailer> retailerList = _autoMapper.Map<IEnumerable<Retailer>>(retailerDtos);
+
+            IEnumerable<Retailer> retailerDtosResult = _marketPartiesRepository.FillRetailers(retailerList);
+
+
+            return _autoMapper.Map<IEnumerable<RetailerDto>>(retailerDtosResult);
+        }
+
         public IEnumerable<RetailerDto> GetAllRetailers()
         {
             IEnumerable<Retailer> retailerList = _marketPartiesRepository.GetAllRetailers();
@@ -31,18 +43,6 @@ namespace Domain.Services
             Retailer retailer = _marketPartiesRepository.GetRetailer(reId);
 
             return _autoMapper.Map<RetailerDto>(retailer);
-        }
-
-        public async Task<IEnumerable<RetailerDto>> FillDBAsync()
-        {
-            IEnumerable<RetailerDto> retailerDtos = await GetRetailersFromWebAsync();
-
-            IEnumerable<Retailer> retailerList = _autoMapper.Map<IEnumerable<Retailer>>(retailerDtos);
-
-            IEnumerable<Retailer> retailerDtosResult = _marketPartiesRepository.FillDB(retailerList);
-
-
-            return _autoMapper.Map< IEnumerable<RetailerDto>>(retailerDtosResult);
         }
 
         private async Task<IEnumerable<RetailerDto>> GetRetailersFromWebAsync()

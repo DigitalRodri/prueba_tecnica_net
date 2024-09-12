@@ -13,6 +13,13 @@ namespace Infraestructure.Repository
             _marketPartiesContext = marketPartiesContext;
         }
 
+        public IEnumerable<Retailer> FillRetailers(IEnumerable<Retailer> retailersList)
+        {
+            _marketPartiesContext.Retailers.AddRange(retailersList);
+            _marketPartiesContext.SaveChanges();
+            return retailersList;
+        }
+
         public IEnumerable<Retailer> GetAllRetailers()
         {
             return _marketPartiesContext.Retailers;
@@ -21,13 +28,6 @@ namespace Infraestructure.Repository
         public Retailer GetRetailer(int reId)
         {
             return _marketPartiesContext.Retailers.Find(reId);
-        }
-
-        public IEnumerable<Retailer> FillDB(IEnumerable<Retailer> retailersList)
-        {
-            _marketPartiesContext.Retailers.AddRange(retailersList);
-            _marketPartiesContext.SaveChanges();
-            return retailersList;
         }
     }
 }

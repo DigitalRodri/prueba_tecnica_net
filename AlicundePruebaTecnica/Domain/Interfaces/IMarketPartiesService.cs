@@ -4,7 +4,7 @@ namespace Domain.Interfaces
 {
     public interface IMarketPartiesService
     {
-        Task<IEnumerable<RetailerDto>> FillDBAsync();
+        Task<IEnumerable<RetailerDto>> FillRetailersAsync();
         public IEnumerable<RetailerDto> GetAllRetailers();
         RetailerDto GetRetailer(int reId);
     }

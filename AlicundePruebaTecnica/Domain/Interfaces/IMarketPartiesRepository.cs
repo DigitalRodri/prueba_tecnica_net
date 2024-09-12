@@ -4,8 +4,8 @@ namespace Domain.Interfaces
 {
     public interface IMarketPartiesRepository
     {
+        IEnumerable<Retailer> FillRetailers(IEnumerable<Retailer> retailersList);
         public IEnumerable<Retailer> GetAllRetailers();
         Retailer GetRetailer(int reId);
-        IEnumerable<Retailer> FillDB(IEnumerable<Retailer> retailersList);
     }
 }
