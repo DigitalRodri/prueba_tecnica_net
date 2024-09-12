@@ -16,6 +16,10 @@ namespace AlicundePruebaTecnica.Controllers
             _marketPartiesService = marketPartiesService;
         }
 
+        /// <summary>
+        /// Fills the DB with data from eSett Open Data API
+        /// </summary>
+        /// <returns>Inserted Retailer data</returns>
         [HttpPost()]
         public ActionResult<IEnumerable<RetailerDto>> FillRetailers()
         {
@@ -31,6 +35,10 @@ namespace AlicundePruebaTecnica.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets all the Retailers from the DB
+        /// </summary>
+        /// <returns>Retailer data</returns>
         [HttpGet()]
         public ActionResult<IEnumerable<RetailerDto>> GetAllRetailers()
         {
@@ -45,6 +53,11 @@ namespace AlicundePruebaTecnica.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets a particular Retailer by its Id
+        /// </summary>
+        /// <param name="reId"></param>
+        /// <returns>Retailer</returns>
         [HttpGet("{reId}")]
         public ActionResult<RetailerDto> GetRetailer(int reId)
         {
