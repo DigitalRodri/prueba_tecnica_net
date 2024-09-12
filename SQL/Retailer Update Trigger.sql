@@ -1,3 +1,5 @@
+-- Creates a Trigger that updates UTCUpdatedDateTime column every time a row is updated
+
 CREATE TRIGGER [marketParties].[UpdateDateTimeRetailer]
 ON [marketParties].[Retailer]
 FOR UPDATE 
