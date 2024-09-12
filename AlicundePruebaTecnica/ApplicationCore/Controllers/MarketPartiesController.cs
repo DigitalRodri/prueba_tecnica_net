@@ -22,9 +22,9 @@ namespace AlicundePruebaTecnica.Controllers
         {
             try
             {
-                IEnumerable<RetailerDto> retailerDTOs = _marketPartiesService.FillRetailersAsync().Result;
+                IEnumerable<RetailerDto> retailersDtoList = _marketPartiesService.FillRetailersAsync().Result;
 
-                return Ok(retailerDTOs);
+                return Ok(retailersDtoList);
             }
             catch (ArgumentException ex)
             {
@@ -41,8 +41,8 @@ namespace AlicundePruebaTecnica.Controllers
         {
             try
             {
-                IEnumerable<RetailerDto> retailerDTOList = _marketPartiesService.GetAllRetailers();
-                return Ok(retailerDTOList);
+                IEnumerable<RetailerDto> retailersDtoList = _marketPartiesService.GetAllRetailers();
+                return Ok(retailersDtoList);
             }
             catch (Exception ex)
             {
@@ -55,10 +55,10 @@ namespace AlicundePruebaTecnica.Controllers
         {
             try
             {
-                RetailerDto retailerDTO = _marketPartiesService.GetRetailer(reId);
+                RetailerDto retailerDto = _marketPartiesService.GetRetailer(reId);
 
-                if (retailerDTO == null) return NoContent();
-                return Ok(retailerDTO);
+                if (retailerDto == null) return NoContent();
+                return Ok(retailerDto);
             }
             catch (ArgumentException ex)
             {

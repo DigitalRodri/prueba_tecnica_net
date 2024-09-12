@@ -21,21 +21,18 @@ namespace Domain.Services
 
         public async Task<IEnumerable<RetailerDto>> FillRetailersAsync()
         {
-            IEnumerable<RetailerDto> retailerDtos = await GetRetailersFromWebAsync();
+            IEnumerable<RetailerDto> webRetailersDtoList = await GetRetailersFromWebAsync();
+            IEnumerable<Retailer> webRetailersList = _autoMapper.Map<IEnumerable<Retailer>>(webRetailersDtoList);
 
-            IEnumerable<Retailer> retailerList = _autoMapper.Map<IEnumerable<Retailer>>(retailerDtos);
-
-            IEnumerable<Retailer> retailerDtosResult = _marketPartiesRepository.FillRetailers(retailerList);
-
-
-            return _autoMapper.Map<IEnumerable<RetailerDto>>(retailerDtosResult);
+            IEnumerable<Retailer> retailersDtoResultList = _marketPartiesRepository.FillRetailers(webRetailersList);
+            return _autoMapper.Map<IEnumerable<RetailerDto>>(retailersDtoResultList);
         }
 
         public IEnumerable<RetailerDto> GetAllRetailers()
         {
-            IEnumerable<Retailer> retailerList = _marketPartiesRepository.GetAllRetailers();
+            IEnumerable<Retailer> retailersList = _marketPartiesRepository.GetAllRetailers();
 
-            return _autoMapper.Map<IEnumerable<RetailerDto>>(retailerList);
+            return _autoMapper.Map<IEnumerable<RetailerDto>>(retailersList);
         }
 
         public RetailerDto GetRetailer(int reId)
@@ -47,18 +44,18 @@ namespace Domain.Services
 
         private async Task<IEnumerable<RetailerDto>> GetRetailersFromWebAsync()
         {
-            IList<RetailerDto> retailerDtos = new List<RetailerDto>();
+            IList<RetailerDto> webRetailersDtoList = new List<RetailerDto>();
 
             var client = _httpClientFactory.CreateClient();
             client.BaseAddress = new Uri("https://api.opendata.esett.com/");
-            IAsyncEnumerable<RetailerDto> response = client.GetFromJsonAsAsyncEnumerable<RetailerDto>("EXP01/Retailers");
+            IAsyncEnumerable<RetailerDto> webResponse = client.GetFromJsonAsAsyncEnumerable<RetailerDto>("EXP01/Retailers");
 
-            await foreach (RetailerDto retailer in response)
+            await foreach (RetailerDto retailer in webResponse)
             {
-                retailerDtos.Add(retailer);
+                webRetailersDtoList.Add(retailer);
             }
 
-            return retailerDtos;
+            return webRetailersDtoList;
         }
     }
 }
