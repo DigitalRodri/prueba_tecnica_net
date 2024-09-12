@@ -15,8 +15,6 @@ namespace AlicundePruebaTecnica.Controllers
             _marketPartiesService = marketPartiesService;
         }
 
-
-
         [HttpPost()]
         public ActionResult<IEnumerable<RetailerDto>> FillRetailers()
         {
@@ -25,10 +23,6 @@ namespace AlicundePruebaTecnica.Controllers
                 IEnumerable<RetailerDto> retailersDtoList = _marketPartiesService.FillRetailersAsync().Result;
 
                 return Ok(retailersDtoList);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex);
             }
             catch (Exception ex)
             {
@@ -59,10 +53,6 @@ namespace AlicundePruebaTecnica.Controllers
 
                 if (retailerDto == null) return NoContent();
                 return Ok(retailerDto);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex);
             }
             catch (Exception ex)
             {
