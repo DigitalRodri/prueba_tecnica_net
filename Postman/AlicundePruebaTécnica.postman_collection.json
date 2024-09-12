@@ -7,7 +7,40 @@
 	},
 	"item": [
 		{
-			"name": "GET",
+			"name": "FillRetailers",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "es-ES",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:16809/api/marketparties",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "16809",
+					"path": [
+						"api",
+						"marketparties"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllRetailers",
 			"protocolProfileBehavior": {
 				"strictSSL": false
 			},
@@ -34,6 +67,40 @@
 					"path": [
 						"api",
 						"marketparties"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetRetailer",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "es-ES",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:16809/api/marketparties/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "16809",
+					"path": [
+						"api",
+						"marketparties",
+						"4"
 					]
 				}
 			},

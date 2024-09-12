@@ -1,0 +1,11 @@
+﻿<Project>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageVersion Include="AutoMapper" Version="13.0.1" />
+		<PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+		<PackageVersion Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.0" />
+	</ItemGroup>
+</Project>
