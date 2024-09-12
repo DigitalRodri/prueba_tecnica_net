@@ -31,7 +31,7 @@ namespace AlicundePruebaTecnica.Controllers
         }
 
         [HttpGet()]
-        public ActionResult<int> GetAllRetailers()
+        public ActionResult<IEnumerable<RetailerDto>> GetAllRetailers()
         {
             try
             {
