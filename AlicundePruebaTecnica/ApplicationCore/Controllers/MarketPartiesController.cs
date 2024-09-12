@@ -1,5 +1,6 @@
 using Domain.DTOs;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AlicundePruebaTecnica.Controllers
@@ -22,7 +23,7 @@ namespace AlicundePruebaTecnica.Controllers
             {
                 IEnumerable<RetailerDto> retailersDtoList = _marketPartiesService.FillRetailersAsync().Result;
 
-                return Ok(retailersDtoList);
+                return Created(new Uri(Request.GetEncodedUrl()), retailersDtoList);
             }
             catch (Exception ex)
             {
