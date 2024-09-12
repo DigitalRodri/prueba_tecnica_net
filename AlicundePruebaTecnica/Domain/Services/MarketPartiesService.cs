@@ -2,6 +2,7 @@
 using Domain.DTOs;
 using Domain.Entities;
 using Domain.Interfaces;
+using System.Net.Http.Json;
 
 namespace Domain.Services
 {
@@ -9,11 +10,13 @@ namespace Domain.Services
     {
         private readonly IMarketPartiesRepository _marketPartiesRepository;
         private readonly IMapper _autoMapper;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public MarketPartiesService(IMarketPartiesRepository marketPartiesRepository, IMapper mapper)
+        public MarketPartiesService(IMarketPartiesRepository marketPartiesRepository, IMapper mapper, IHttpClientFactory httpClientFactory)
         {
             _marketPartiesRepository = marketPartiesRepository;
             _autoMapper = mapper;
+            _httpClientFactory = httpClientFactory;
         }
 
         public IEnumerable<RetailerDto> GetAllRetailers()
@@ -28,6 +31,34 @@ namespace Domain.Services
             Retailer retailer = _marketPartiesRepository.GetRetailer(reId);
 
             return _autoMapper.Map<RetailerDto>(retailer);
+        }
+
+        public async Task<IEnumerable<RetailerDto>> FillDBAsync()
+        {
+            IEnumerable<RetailerDto> retailerDtos = await GetRetailersFromWebAsync();
+
+            IEnumerable<Retailer> retailerList = _autoMapper.Map<IEnumerable<Retailer>>(retailerDtos);
+
+            IEnumerable<Retailer> retailerDtosResult = _marketPartiesRepository.FillDB(retailerList);
+
+
+            return _autoMapper.Map< IEnumerable<RetailerDto>>(retailerDtosResult);
+        }
+
+        private async Task<IEnumerable<RetailerDto>> GetRetailersFromWebAsync()
+        {
+            IList<RetailerDto> retailerDtos = new List<RetailerDto>();
+
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri("https://api.opendata.esett.com/");
+            IAsyncEnumerable<RetailerDto> response = client.GetFromJsonAsAsyncEnumerable<RetailerDto>("EXP01/Retailers");
+
+            await foreach (RetailerDto retailer in response)
+            {
+                retailerDtos.Add(retailer);
+            }
+
+            return retailerDtos;
         }
     }
 }

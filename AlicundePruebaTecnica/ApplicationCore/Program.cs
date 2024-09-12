@@ -20,6 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHttpClient();
 
 builder.Services.AddDbContext<MarketPartiesContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MarketPartiesConnectionString")));

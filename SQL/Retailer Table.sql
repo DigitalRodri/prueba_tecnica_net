@@ -1,11 +1,10 @@
-DROP TABLE [account].[Account]
+DROP TABLE [marketParties].[Retailer]
 
-CREATE TABLE [account].[Account](
-	UUID UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID() PRIMARY KEY,
-	Email varchar(50) NOT NULL,
-	Password BINARY(32) NOT NULL,
-	Name varchar(25) NOT NULL,
-	Surname varchar(25) NOT NULL,
-	Title varchar(5) NULL,
-	UTCCreatedDateTime DATETIME2 DEFAULT getdate() NOT NULL,
-    UTCUpdatedDateTime DATETIME2 DEFAULT getdate() NOT NULL)
+CREATE TABLE [marketParties].[Retailer](
+	[ReId] [int] IDENTITY(1,1) NOT NULL,
+	[ReName] [varchar](100) NOT NULL,
+	[Country] [varchar](2) NOT NULL,
+	[CodingScheme] [varchar](3) NOT NULL,
+	[ReCode] [varchar](20) NOT NULL,
+	[UTCCreatedDateTime] [datetime2] DEFAULT getdate() NOT NULL,
+	[UTCUpdatedDateTime] [datetime2] DEFAULT getdate() NOT NULL)

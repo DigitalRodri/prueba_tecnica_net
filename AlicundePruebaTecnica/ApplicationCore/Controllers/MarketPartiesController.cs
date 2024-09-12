@@ -48,5 +48,24 @@ namespace AlicundePruebaTecnica.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
+
+        [HttpPost()]
+        public ActionResult<IEnumerable<RetailerDto>> FillDB()
+        {
+            try
+            {
+                IEnumerable<RetailerDto> retailerDTOs = _marketPartiesService.FillDBAsync().Result;
+
+                return Ok(retailerDTOs);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
+        }
     }
 }

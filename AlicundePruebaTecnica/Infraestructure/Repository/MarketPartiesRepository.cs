@@ -22,5 +22,12 @@ namespace Infraestructure.Repository
         {
             return _marketPartiesContext.Retailers.Find(reId);
         }
+
+        public IEnumerable<Retailer> FillDB(IEnumerable<Retailer> retailersList)
+        {
+            _marketPartiesContext.Retailers.AddRange(retailersList);
+            _marketPartiesContext.SaveChanges();
+            return retailersList;
+        }
     }
 }

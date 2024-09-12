@@ -14,7 +14,7 @@ namespace Domain.Entities
 
         [Required]
         [Column(TypeName = "varchar")]
-        [StringLength(40)]
+        [StringLength(100)]
         public string ReName { get; set; }
 
         [Required]

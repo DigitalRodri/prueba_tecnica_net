@@ -9,6 +9,7 @@ namespace Domain.Profiles
         public RetailerProfile() 
         {
             CreateMap<Retailer, RetailerDto>();
+            CreateMap<RetailerDto, Retailer>();
         }
     }
 }
