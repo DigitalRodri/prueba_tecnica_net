@@ -1,7 +1,7 @@
 DROP TABLE [marketParties].[Retailer]
 
 CREATE TABLE [marketParties].[Retailer](
-	[ReId] [int] IDENTITY(1,1) NOT NULL,
+	[ReId] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[ReName] [varchar](100) NOT NULL,
 	[Country] [varchar](2) NOT NULL,
 	[CodingScheme] [varchar](3) NOT NULL,
