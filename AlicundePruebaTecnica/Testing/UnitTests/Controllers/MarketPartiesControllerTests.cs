@@ -4,8 +4,6 @@ using Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System.Data;
-using System;
 using System.Net;
 using Testing.Helpers;
 
