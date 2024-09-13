@@ -9,6 +9,11 @@ Realizar un programa en .Net - C#
 * 🔷 Construir una api REST con awagger que permita visualizar los datos almacenados en la base de datos.
   * ✅ **Realizado en GET [api/marketparties].**
 -----
+
+My Github with other similar projects: https://github.com/DigitalRodri
+
+-----
+
 *Run using IIS Express and ApplicationCore as Startup Project.*
 
 *For testing locally use IISExpress and Swagger, or Postman with: http://localhost:16809/api/marketparties.*
